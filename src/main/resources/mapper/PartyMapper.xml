@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rhdck.vote.mapper.PartyMapper"><!--namespace를 통해 UserDAO와 연결합니다. -->
+    <select id="getList" resultType="Party">
+    select p.party_no, p.title, pd.id, pd.no from party p
+    left join party_detail pd
+    on p.party_no = pd.party_no;
+    </select>
+    <select id="getTitle" resultType="Title">
+        select * from party;
+    </select>
+    <select id="getPlayer" resultType="PartyDetail">
+        select * from party_detail;
+    </select>
+</mapper>
