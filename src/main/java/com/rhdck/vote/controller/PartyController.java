@@ -26,9 +26,9 @@ public class PartyController {
     private PartyService service;
 
     @GetMapping
-    public List<PartyPlayerList> getAllParty(){
+    public List<Party> getAllParty(){
 //        System.out.println(service.getList());
-        return service.getList();
+        return repo.findAll();
     }
 
     @GetMapping("/title")
