@@ -1,6 +1,5 @@
 package com.rhdck.vote.controller;
 
-import com.rhdck.vote.dto.PartyPlayerList;
 import com.rhdck.vote.entity.Party;
 import com.rhdck.vote.entity.PartyDetail;
 import com.rhdck.vote.repository.PartyRepository;
@@ -27,8 +26,22 @@ public class PartyController {
 
     @GetMapping
     public List<Party> getAllParty(){
-//        System.out.println(service.getList());
-        return repo.findAll();
+        List<Party> list = repo.findAll();
+        System.out.println(list);
+        System.out.println(repos.findAll());
+//        List<PartyPlayerList> playerLists = new ArrayList<>();
+        List<PartyDetail> playerList = repos.findAll();
+        for(int i=0; i < playerList.size(); i++){
+            for(int j=0; j < list.size(); j++){
+                if(list.get(j).getNo() == playerList.get(i).getParty_no()){
+                    List<PartyDetail> party = list.get(j).getPlayers();
+                    party.add(playerList.get(i));
+                    list.get(j).setPlayers(party);
+                    break;
+                }
+            }
+        }
+        return list;
     }
 
     @GetMapping("/title")

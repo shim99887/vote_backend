@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@ToString
 @Table(name = "party")
 public class Party {
     @Id
@@ -22,10 +23,10 @@ public class Party {
 
 //    @JoinColumn(name = "party_no", nullable = true)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PartyDetail> details = new ArrayList<>();
+    private List<PartyDetail> players = new ArrayList<>();
 
     public void addDetails(PartyDetail detail){
-        details.add(detail);
+        players.add(detail);
         detail.setParty(this);
     }
 }

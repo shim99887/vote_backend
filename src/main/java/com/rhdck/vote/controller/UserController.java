@@ -28,11 +28,11 @@ public class UserController {
         return list;
     }
 
-//    @PostMapping("/login")
-    @RequestMapping(value = "/login", produces = "application/json", method = RequestMethod.POST)
+//    @RequestMapping(value = "/login", produces = "application/json", method = RequestMethod.POST)
+    @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody Map<String, String> map){
         System.out.println(map);
-        User user = repo.login(map.get("id"), map.get("pwd"));
+        User user = repo.login(map.get("id"), map.get("password"));
 
         if(user == null){
             return new ResponseEntity<User>(new User(), HttpStatus.BAD_REQUEST);

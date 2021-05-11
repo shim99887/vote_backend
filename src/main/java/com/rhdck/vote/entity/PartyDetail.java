@@ -1,5 +1,6 @@
 package com.rhdck.vote.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 @Entity
 @Getter
 @Setter
+@ToString
 @Table(name = "party_detail")
 public class PartyDetail {
     @Id
@@ -20,5 +22,6 @@ public class PartyDetail {
 
     @ManyToOne
     @JoinColumn(name = "party_no", referencedColumnName = "party_no", nullable = false, updatable = false, insertable = false)
+    @JsonIgnore
     private Party party;
 }
