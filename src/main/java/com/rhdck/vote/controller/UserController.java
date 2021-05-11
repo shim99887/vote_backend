@@ -1,7 +1,8 @@
 package com.rhdck.vote.controller;
 
-import com.rhdck.vote.entity.User;
+import com.rhdck.vote.dto.User;
 import com.rhdck.vote.repository.UserRepository;
+import com.rhdck.vote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,20 +15,21 @@ import java.util.Map;
 @CrossOrigin("*")
 @RequestMapping("/user")
 public class UserController {
-
     @Autowired
-    private UserRepository repo;
+    private UserService service;
 
     @GetMapping
     public List<User> test(){
         List<User> list;
-        list = repo.findAll();
+        list = service.getAllUser();
         return list;
     }
 
-    @PostMapping
+//    @PostMapping("/login")
+    @RequestMapping(value = "/login", produces = "application/json", method = RequestMethod.POST)
     public ResponseEntity<User> login(@RequestBody Map<String, String> map){
-        User user = repo.login(map.get("id"), map.get("password"));
+        System.out.println(map);
+        User user = service.login(map);
 
         if(user == null){
             return new ResponseEntity<User>(new User(), HttpStatus.BAD_REQUEST);
